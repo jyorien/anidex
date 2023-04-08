@@ -10,6 +10,8 @@ type HomeAnime struct {
 	Title  string          `json:"title"`
 	Type   string          `json:"type"`
 	Status string          `json:"status"`
+	Season string          `json:"season"`
+	Year   int             `json:"year"`
 }
 
 type NormalJpgImages struct {
