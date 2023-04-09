@@ -1,19 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from '@mantine/core'
-import { NavBar } from './NavBar'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Button } from "@mantine/core";
+import { NavBar } from "./NavBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Detail } from "./pages/Detail";
 function App() {
-
   return (
     <div>
-    <NavBar links={
-      [{link: "#", label: "Current Season", links:[]},
-      {link: "#", label: "Top Anime", links:[]},
-      ]}/>
+      <BrowserRouter>
+        <NavBar
+          links={[
+            { link: "/", label: "Current Season", links: [] },
+            { link: "/", label: "Top Anime", links: [] },
+          ]}
+        />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/detail" element={<Detail />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
