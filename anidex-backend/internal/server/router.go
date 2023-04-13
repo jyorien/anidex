@@ -3,13 +3,18 @@ package server
 import (
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func setRouter() *gin.Engine {
 	// create default gin router with Logger and Recovery middleware
 	router := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:5173"}
+	config.AddAllowMethods("GET", "POST")
 
+	router.Use(cors.New(config))
 	api := router.Group("/api")
 
 	// create anime route group
