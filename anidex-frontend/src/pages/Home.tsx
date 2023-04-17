@@ -7,22 +7,25 @@ const client = axios.create({
   baseURL: "http://localhost:8080/api/anime",
 });
 export function Home() {
-  const [posts, setPosts] = useState([]);
-
+  const [seasonalAnime, setSeasonalAnime] = useState([]);
+  const [topAnime, setTopAnime] = useState([]);
   useEffect(() => {
     client.get("/current-season").then((res) => {
-      setPosts(res.data.data.splice(0, 6));
+      setSeasonalAnime(res.data.data.splice(0, 6));
+    });
+    client.get("/top").then((res) => {
+      setTopAnime(res.data.data.splice(0, 6));
     });
   }, []);
   return (
     <>
       <Container size="90%">
         <Text color="white" fz="36px" fw={700} align="start">
-          {displaySeasonAndYear(posts)}
+          {displaySeasonAndYear(seasonalAnime)}
         </Text>
         <Space h="xl" />
         <Grid gutter="50px">
-          {posts.map((element) => (
+          {seasonalAnime.map((element) => (
             <Grid.Col span={4} key={element["mal_id"]}>
               <HomeAnime
                 mal_id={element["mal_id"]}
@@ -37,6 +40,26 @@ export function Home() {
       </Container>
 
       <Space h="xl" />
+
+      <Container size="90%">
+        <Text color="white" fz="36px" fw={700} align="start">
+          Top Anime
+        </Text>
+        <Space h="xl" />
+        <Grid gutter="50px">
+          {topAnime.map((element) => (
+            <Grid.Col span={4} key={element["mal_id"]}>
+              <HomeAnime
+                mal_id={element["mal_id"]}
+                name={element["title"]}
+                type={element["type"]}
+                status={element["status"]}
+                src={element["images"]["jpg"]["image_url"]}
+              />
+            </Grid.Col>
+          ))}
+        </Grid>
+      </Container>
     </>
   );
 }
