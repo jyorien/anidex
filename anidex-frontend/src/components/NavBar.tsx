@@ -115,7 +115,6 @@ export function NavBar({ links }: HeaderActionProps) {
     <Header
       height={HEADER_HEIGHT}
       sx={{ borderBottom: 0 }}
-      mb={120}
       bg="#2B4E67"
       px="sm"
     >

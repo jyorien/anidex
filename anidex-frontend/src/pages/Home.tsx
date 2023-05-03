@@ -19,7 +19,7 @@ export function Home() {
   }, []);
   return (
     <>
-      <Container size="90%">
+      <Container size="90%" mt={50}>
         <Text color="white" fz="36px" fw={700} align="start">
           {displaySeasonAndYear(seasonalAnime)}
         </Text>
