@@ -71,6 +71,7 @@ export function Detail() {
   return (
     <Container size={"100%"} p={0}>
       <Container
+        p={0}
         size={"100%"}
         style={{
           backgroundImage: `url(${detailedAnime.trailer_img})`,
@@ -107,13 +108,13 @@ export function Detail() {
               <Stack>
                 <Text
                   className={classes.detailText}
-                  fz="36px"
-                  fw={700}
+                  fz="24px"
+                  fw={500}
                   ta="start"
                 >
                   Synopsis
                 </Text>
-                <Text className={classes.detailText} ta={"start"}>
+                <Text mr={60} className={classes.detailText} align="justify">
                   {detailedAnime.synopsis}
                 </Text>
               </Stack>
