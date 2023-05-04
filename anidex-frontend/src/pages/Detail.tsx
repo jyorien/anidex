@@ -2,6 +2,7 @@ import {
   BackgroundImage,
   Center,
   Container,
+  Flex,
   Grid,
   Image,
   Overlay,
@@ -27,6 +28,7 @@ export function Detail() {
   const params = useParams();
   const { classes } = useStyles();
   const [detailedAnime, setDetailedAnime] = useState<DetailedAnimeData>();
+  const [activeTab, setActiveTab] = useState<string | null>("trailer");
 
   const client = axios.create({
     baseURL: "http://localhost:8080/api/anime",
@@ -38,6 +40,7 @@ export function Detail() {
       const detail: DetailedAnimeData = {
         poster_img: obj.images.jpg.large_image_url,
         trailer_img: obj.trailer.images.medium_image_url,
+        trailer_url: obj.trailer.embed_url,
         title: obj.title,
         title_en: obj.title_english,
         title_jp: obj.title_japanese,
@@ -122,6 +125,63 @@ export function Detail() {
           </Grid.Col>
         </Grid>
       </Container>
+      <Tabs
+        mx={20}
+        value={activeTab}
+        onTabChange={setActiveTab}
+        py={15}
+        unstyled
+        fz={22}
+        ta={"start"}
+        styles={(themes) => ({
+          tab: {
+            color: "white",
+            border: "none",
+            outline: "none",
+            backgroundColor: "transparent",
+            marginRight: "5px",
+            "&:hover": {
+              cursor: "pointer",
+              borderBottom: "2px solid white",
+              fontSize: "24px",
+            },
+          },
+          tabsList: {
+            marginTop: "20px",
+            height: "50px",
+          },
+        })}
+      >
+        <Tabs.List>
+          <Tabs.Tab value="trailer">Trailer</Tabs.Tab>
+          <Tabs.Tab value="background">Background</Tabs.Tab>
+          <Tabs.Tab value="cast">Cast</Tabs.Tab>
+          <Tabs.Tab value="themes">Theme Songs</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="trailer">
+          <Flex justify={"flex-end"}>
+            <iframe
+              src={detailedAnime.trailer_url.replace(
+                "autoplay=1",
+                "autoplay=0"
+              )}
+              style={{ border: "none" }}
+              width={"800"}
+              height={"500"}
+            />
+          </Flex>
+        </Tabs.Panel>
+        <Tabs.Panel value="background">
+          <Text>BG</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="cast">
+          <Text>Cast</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="themes">
+          <Text>Themes</Text>
+        </Tabs.Panel>
+      </Tabs>
     </Container>
   );
 }

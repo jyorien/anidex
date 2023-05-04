@@ -1,6 +1,7 @@
 interface DetailedAnimeData {
     poster_img: string,
     trailer_img: string,
+    trailer_url: string,
     title: string,
     title_en: string,
     title_jp: string,
