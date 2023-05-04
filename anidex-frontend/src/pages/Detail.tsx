@@ -173,7 +173,11 @@ export function Detail() {
           </Flex>
         </Tabs.Panel>
         <Tabs.Panel value="background">
-          <Text>BG</Text>
+          <Text px={15} align="justify" className={classes.detailText}>
+            {detailedAnime.background != ""
+              ? detailedAnime.background
+              : "No background information"}
+          </Text>
         </Tabs.Panel>
         <Tabs.Panel value="cast">
           <Text>Cast</Text>
