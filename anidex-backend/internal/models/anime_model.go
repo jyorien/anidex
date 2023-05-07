@@ -41,7 +41,7 @@ type DetailedAnime struct {
 	AirPeriod         AirPeriod           `json:"aired"`
 	EpisodeDuration   string              `json:"duration"`
 	Synopsis          string              `json:"synopsis"`
-	Background        string              `json:"bacground"`
+	Background        string              `json:"background"`
 	Season            string              `json:"season"`
 	Year              string              `json:"year"`
 	BroadcastSchedule BroadcastSchedule   `json:"broadcast"`

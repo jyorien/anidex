@@ -40,6 +40,7 @@ export function Detail() {
   useEffect(() => {
     client.get(`/${params.id}`).then((res) => {
       const obj = res.data.data;
+      console.log(obj);
       const detail: DetailedAnimeData = {
         poster_img: obj.images.jpg.large_image_url,
         trailer_img: obj.trailer.images.medium_image_url,
@@ -55,7 +56,7 @@ export function Detail() {
         air_period: obj.aired.string,
         episode_duration: obj.duration,
         synopsis: obj.synopsis,
-        background: obj.bacground,
+        background: obj.background,
         season: obj.season,
         year: obj.year,
         broadcast_time: obj.broadcast.string,
@@ -72,7 +73,7 @@ export function Detail() {
       setDetailedAnime(detail);
     });
     {
-      console.log(`hello ${detailedAnime?.theme.openings}`);
+      console.log(`hello ${detailedAnime?.background}`);
     }
   }, []);
   if (detailedAnime == null) return <></>;
