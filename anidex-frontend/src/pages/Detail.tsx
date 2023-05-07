@@ -70,8 +70,10 @@ export function Detail() {
         },
       };
       setDetailedAnime(detail);
-      console.log(detail.trailer_img);
     });
+    {
+      console.log(`hello ${detailedAnime?.theme.openings}`);
+    }
   }, []);
   if (detailedAnime == null) return <></>;
   return (
@@ -176,6 +178,12 @@ export function Detail() {
             Cast
           </Tabs.Tab>
           <Tabs.Tab
+            value="staff"
+            className={activeTab == "staff" ? classes.selected : ""}
+          >
+            Staff
+          </Tabs.Tab>
+          <Tabs.Tab
             value="themes"
             className={activeTab == "themes" ? classes.selected : ""}
           >
@@ -206,23 +214,56 @@ export function Detail() {
         <Tabs.Panel value="cast">
           <Text>Cast</Text>
         </Tabs.Panel>
+        <Tabs.Panel value="staff">
+          <Grid>
+            <Grid.Col span={6}>
+              <Text className={classes.detailText} fz={"xl"} fw={700}>
+                Producers
+              </Text>
+              {detailedAnime.producers.map((producer) => {
+                return (
+                  <Text className={classes.detailText}>{producer.name}</Text>
+                );
+              })}
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text className={classes.detailText} fz={"xl"} fw={700}>
+                Licensors
+              </Text>
+              {detailedAnime.licensors.map((licensor) => {
+                return (
+                  <Text className={classes.detailText}>{licensor.name}</Text>
+                );
+              })}
+            </Grid.Col>
+          </Grid>
+        </Tabs.Panel>
         <Tabs.Panel value="themes">
           <Grid>
             <Grid.Col span={6}>
               <Text className={classes.detailText} fz={"xl"} fw={700}>
                 Opening(s)
               </Text>
-              {detailedAnime.theme.openings.map((opening) => {
-                return <Text className={classes.detailText}>{opening}</Text>;
-              })}
+
+              {detailedAnime.theme.openings.length > 0 ? (
+                detailedAnime.theme.openings.map((opening) => {
+                  return <Text className={classes.detailText}>{opening}</Text>;
+                })
+              ) : (
+                <Text className={classes.detailText}>No opening found</Text>
+              )}
             </Grid.Col>
             <Grid.Col span={6}>
               <Text className={classes.detailText} fz={"xl"} fw={700}>
                 Ending(s)
               </Text>
-              {detailedAnime.theme.endings.map((ending) => {
-                return <Text className={classes.detailText}>{ending}</Text>;
-              })}
+              {detailedAnime.theme.endings.length > 0 ? (
+                detailedAnime.theme.endings.map((ending) => {
+                  return <Text className={classes.detailText}>{ending}</Text>;
+                })
+              ) : (
+                <Text className={classes.detailText}>No ending found</Text>
+              )}
             </Grid.Col>
           </Grid>
         </Tabs.Panel>
