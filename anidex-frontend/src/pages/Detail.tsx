@@ -127,6 +127,20 @@ export function Detail() {
                   {detailedAnime.synopsis}
                 </Text>
               </Stack>
+              <Text
+                className={classes.detailText}
+                fz="24px"
+                fw={500}
+                ta="start"
+                display={"inline"}
+              >
+                Genres:{" "}
+                {detailedAnime.genres.map((genre, index) => {
+                  return index < detailedAnime.genres.length - 1
+                    ? `${genre.name}, `
+                    : `${genre.name}`;
+                })}
+              </Text>
             </Stack>
           </Grid.Col>
         </Grid>
