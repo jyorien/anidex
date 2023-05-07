@@ -22,6 +22,9 @@ const useStyles = createStyles((theme) => ({
   detailText: {
     color: "white",
   },
+  selected: {
+    borderBottom: "2px solid white",
+  },
 }));
 
 export function Detail() {
@@ -146,6 +149,7 @@ export function Detail() {
               fontSize: "24px",
             },
           },
+
           tabsList: {
             marginTop: "20px",
             height: "50px",
@@ -153,10 +157,30 @@ export function Detail() {
         })}
       >
         <Tabs.List>
-          <Tabs.Tab value="trailer">Trailer</Tabs.Tab>
-          <Tabs.Tab value="background">Background</Tabs.Tab>
-          <Tabs.Tab value="cast">Cast</Tabs.Tab>
-          <Tabs.Tab value="themes">Theme Songs</Tabs.Tab>
+          <Tabs.Tab
+            value="trailer"
+            className={activeTab == "trailer" ? classes.selected : ""}
+          >
+            Trailer
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="background"
+            className={activeTab == "background" ? classes.selected : ""}
+          >
+            Background
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="cast"
+            className={activeTab == "cast" ? classes.selected : ""}
+          >
+            Cast
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="themes"
+            className={activeTab == "themes" ? classes.selected : ""}
+          >
+            Theme Songs
+          </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="trailer">
@@ -183,7 +207,24 @@ export function Detail() {
           <Text>Cast</Text>
         </Tabs.Panel>
         <Tabs.Panel value="themes">
-          <Text>Themes</Text>
+          <Grid>
+            <Grid.Col span={6}>
+              <Text className={classes.detailText} fz={"xl"} fw={700}>
+                Opening(s)
+              </Text>
+              {detailedAnime.theme.openings.map((opening) => {
+                return <Text className={classes.detailText}>{opening}</Text>;
+              })}
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text className={classes.detailText} fz={"xl"} fw={700}>
+                Ending(s)
+              </Text>
+              {detailedAnime.theme.endings.map((ending) => {
+                return <Text className={classes.detailText}>{ending}</Text>;
+              })}
+            </Grid.Col>
+          </Grid>
         </Tabs.Panel>
       </Tabs>
     </Container>
