@@ -1,7 +1,16 @@
-import { Container, Grid, Space, Text } from "@mantine/core";
+import {
+  Button,
+  Col,
+  Container,
+  Grid,
+  Input,
+  Space,
+  Text,
+} from "@mantine/core";
 import { HomeAnime } from "../components/HomeAnime";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { IconSearch } from "@tabler/icons-react";
 
 const client = axios.create({
   baseURL: "http://localhost:8080/api/anime",
@@ -20,6 +29,19 @@ export function Home() {
   return (
     <>
       <Container size="90%" mt={50}>
+        <Grid justify="center">
+          <Input
+            size="md"
+            w={"50%"}
+            icon={<IconSearch />}
+            placeholder="Search for anime..."
+          />
+          <Space w="md" />
+          <Button onClick={(event) => {}} size="md">
+            Search
+          </Button>
+        </Grid>
+
         <Text color="white" fz="36px" fw={700} align="start">
           {displaySeasonAndYear(seasonalAnime)}
         </Text>
