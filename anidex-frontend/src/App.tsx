@@ -11,12 +11,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <NavBar
-          links={[
-            { link: "/", label: "Current Season", links: [] },
-            { link: "/", label: "Top Anime", links: [] },
-          ]}
-        />
+        <NavBar links={[]} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />

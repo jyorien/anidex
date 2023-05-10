@@ -126,7 +126,7 @@ export function NavBar({ links }: HeaderActionProps) {
           </Group>
         </Group>
 
-        <Group spacing={5}>
+        {/* <Group spacing={5}>
           <UnstyledButton px="sm">
             <Text color="white">Register</Text>
           </UnstyledButton>
@@ -134,7 +134,7 @@ export function NavBar({ links }: HeaderActionProps) {
           <UnstyledButton px="sm">
             <Text color="white">Login</Text>
           </UnstyledButton>
-        </Group>
+        </Group> */}
       </Container>
     </Header>
   );
