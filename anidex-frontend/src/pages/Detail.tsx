@@ -146,6 +146,7 @@ export function Detail() {
         </Grid>
       </Container>
       <Tabs
+        h={600}
         mx={20}
         value={activeTab}
         onTabChange={setActiveTab}
