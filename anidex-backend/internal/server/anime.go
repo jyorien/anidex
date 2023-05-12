@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -99,6 +100,39 @@ func getAnimeById(ctx *gin.Context) {
 
 	// parse body into SeasonalAnimeResponse object
 	var responseObject models.DetailedAnimeResponse
+	json.Unmarshal(responseData, &responseObject)
+
+	// parse object back into JSON
+	out, err := json.Marshal(responseObject)
+	if err != nil {
+		ctx.JSON(http.StatusNoContent, gin.H{
+			"msg": "Failed to retrieve anime data",
+		})
+	}
+
+	ctx.JSON(http.StatusOK, json.RawMessage(string(out)))
+}
+
+func getSearchAnime(ctx *gin.Context) {
+	search := ctx.Query("q")
+	search = strings.Replace(search, " ", "%20", -1)
+
+	res, err := http.Get(fmt.Sprintf("%s/anime?q=%s", baseUrl, search))
+	if err != nil {
+		ctx.JSON(http.StatusNoContent, gin.H{
+			"msg": "Failed to retrieve anime data",
+		})
+	}
+	// read response body as bytes
+	responseData, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		ctx.JSON(http.StatusNoContent, gin.H{
+			"msg": "Failed to retrieve anime data",
+		})
+	}
+
+	// parse body into SeasonalAnimeResponse object
+	var responseObject models.SearchAnimeResponse
 	json.Unmarshal(responseData, &responseObject)
 
 	// parse object back into JSON

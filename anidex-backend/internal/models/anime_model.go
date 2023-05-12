@@ -26,6 +26,18 @@ type DetailedAnimeResponse struct {
 	Data DetailedAnime `json:"data"`
 }
 
+type SearchAnimeResponse struct {
+	Data []DetailedAnime `json:"data"`
+}
+
+type SearchAnime struct {
+	MalId    int            `json:"mal_id"`
+	Images   LargeJpgImages `json:"images"`
+	Title    string         `json:"title"`
+	Type     string         `json:"type"`
+	Synopsis string         `json:"synopsis"`
+}
+
 type DetailedAnime struct {
 	MalId             int                 `json:"mal_id"`
 	Images            LargeJpgImages      `json:"images"`

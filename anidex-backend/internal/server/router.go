@@ -22,6 +22,7 @@ func setRouter() *gin.Engine {
 	anime.GET("/current-season", getCurrentSeasonAnime)
 	anime.GET("/top", getTopAnime)
 	anime.GET("/:id", getAnimeById)
+	anime.GET("/search", getSearchAnime)
 
 	router.NoRoute(func(ctx *gin.Context) { ctx.JSON(http.StatusNotFound, gin.H{}) })
 
